@@ -2,6 +2,10 @@ import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
+//请注意本测试代码是在编写前端之前完成的，确保了合约内容的正确
+//但在编写前端之后对合约内容进行了改动，因此现在运行测试代码会报错
+//所以需要测试请直接打开网页测试功能，不要使用这里的测试代码
+
 describe("BorrowYourCar Contract", function () {
   // Define a fixture to reuse the same setup in every test
   async function deployFixture() {
@@ -14,15 +18,15 @@ describe("BorrowYourCar Contract", function () {
     const borrowYourCar = await BorrowYourCar.deploy(myERC20.address);
 
     // Distribute cars to users
-    await borrowYourCar.connect(owner).distributeCar(user1.address);
-    await borrowYourCar.connect(owner).distributeCar(user2.address);
-    await borrowYourCar.connect(owner).distributeCar(user3.address);
+    await borrowYourCar.connect(owner).distributeCar();
+    await borrowYourCar.connect(owner).distributeCar();
+    await borrowYourCar.connect(owner).distributeCar();
 
     // Transfer some tokens to users
     const initialTokens = ethers.utils.parseEther("10000"); // Initial token balance for users
-    await myERC20.transfer(user1.address, initialTokens);
-    await myERC20.transfer(user2.address, initialTokens);
-    await myERC20.transfer(user3.address, initialTokens);
+    await myERC20.connect(user1).airdrop();
+    await myERC20.connect(user2).airdrop();
+    await myERC20.connect(user3).airdrop();
 
     return { borrowYourCar, myERC20, owner, user1, user2, user3 };
   }

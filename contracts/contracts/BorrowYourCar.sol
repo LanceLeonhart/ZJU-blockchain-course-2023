@@ -80,7 +80,7 @@ contract BorrowYourCar is ERC721, Ownable {
             }
         }
 
-        //创建一个大小适当的数组，只包含可供借用的汽车令牌
+        //创建一个大小适当的数组，只包含可供借用的汽车
         uint256[] memory result = new uint256[](availableCount);
         for (uint256 j = 0; j < availableCount; j++) {
             result[j] = availableCars[j];
@@ -100,7 +100,7 @@ contract BorrowYourCar is ERC721, Ownable {
     //计算租金
     function calculateRent(uint256 duration) internal pure returns (uint256) {
         //定义租金逻辑，根据租用的时间来计算租金
-        uint256 hourlyRate = 10; //每小时的租金为1个代币
+        uint256 hourlyRate = 10; //每小时的租金为10个代币
         return hourlyRate * duration;   //duration的单位是小时
     }
 }
