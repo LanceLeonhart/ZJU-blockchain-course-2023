@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
+//MyERC20.sol文件基本参考助教demo编写
 contract MyERC20 is ERC20 {
     mapping(address => bool) claimedAirdropPlayerList;
 
